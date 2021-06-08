@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
-const path = require("path");
 const cloudinary = require("cloudinary").v2;
 const fileupload = require("express-fileupload");
 const { error } = require("console");
@@ -27,7 +26,7 @@ cloudinary.config({
   api_secret: "kb59RuRC5N7pudX0qVlXHkwSAyk",
 });
 
-////////////////////////////////////// Registration of User
+/////////////////////////////////////////// Registration of User
 
 exports.Registration = async (req, res) => {
   try {
@@ -70,7 +69,7 @@ exports.Registration = async (req, res) => {
   }
 };
 
-/////////////////////////////////         Verify Account
+///////////////////////////////////////////  Verify Account
 
 exports.verifyaccount = async (req, res) => {
   try {
@@ -135,6 +134,7 @@ exports.publishBook = async (req, res) => {
     // const publisher = await admin.findOne({ _id: publisherId })
 
     const user = req.admin;
+
     if (user.userType == "admin") {
       const newBooks = await books.create({
         publisherId: user._id,
@@ -149,7 +149,7 @@ exports.publishBook = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send({ msg: "error" });
+    res.status(400).send(error);
   }
 };
 
